@@ -1,0 +1,15 @@
+/*This file is mostly for helper styles, e.g. hidden templates, etc.*/
+.template {
+    display: none;
+}
+
+/*Hide/Show info for an empty list (e.g. "no active devices") */
+.empty-list {
+    display:none;
+}
+
+.mdl-list__item:only-of-type{
+    display: flex;
+}
+
+/*IMPORTANT, LIVE-SAVING INFO: Dont add visual styles for mobile and/or desktop here!!! :) */
