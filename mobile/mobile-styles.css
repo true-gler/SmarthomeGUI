@@ -1,3 +1,7 @@
 .mdl-card {
     min-height: 1em;
 }
+
+.mdl-list__item-avatar, .mdl-list__item-avatar.material-icons {
+    border-radius: 10%;
+}

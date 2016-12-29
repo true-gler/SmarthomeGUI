@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "lightbulb_outline",
+        "name": "Main light, Living Room",
+        "state": "checked"
+    },
+    {
+        "icon": "devices",
+        "name": "TV, Living Room",
+        "state": "checked"
+    },
+    {
+        "icon": "format_align_justify",
+        "name": "South Shutter, Living Room",
+        "state": "checked"
+    }
+]
