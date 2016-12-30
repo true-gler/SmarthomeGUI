@@ -13,11 +13,60 @@ For the mobile version, I included jquery and simple templates for generating li
 
 Seems like an overkill? Maybe, but in my opinion it's better than wasting hours for changing static HTML pages again and again. And it makes parallel work easier!
 
-## Templates
-(Still to be done)
-Data, such as device lists, is stored in **.json** files, so that it can be easily changed and kept consistent between different pages and mobile/desktop version. These files are read in. For each list, an HTML-template has to be defined (see */mobile/overview.html* for an example). For each entry in the data, a copy of the template-element is created and filled and added to the list. For information about the template syntax, see the [Nano Templating Engine](https://github.com/trix/nano).
-
 ## Folder and File Structure
 Mobile stuff into /mobile, desktop stuff into /desktop. :)
 Please use the respective .css file for your styles!
+
+## Templates
+Data, such as device lists, is stored in **.json** files, so that it can be easily changed and kept consistent between different pages and mobile/desktop version. These files are read in. For each list, an HTML-template has to be defined (see */mobile/overview.html* for an example). For each entry in the data, a copy of the template-element is created and filled and added to the list. For information about the template syntax, see the [Nano Templating Engine](https://github.com/trix/nano).
+
+The templating functions are located in *common-scripts.js*. In most cases, ```createListFromFile(listSelector, templateSelector, dataFilePath)``` will be used. Call this function from your custom page script after the document is ready. E.g.:
+
+```javascript
+// This is in mobile/overview/overview.js
+$(document).ready(function () {
+    createListFromFile("#overview-list", ".template > li", "overviewList.json");
+});
+```
+
+The respective data file (*mobile/overview/overview.js) may look like this:
+```json
+[
+    {
+        "icon": "lightbulb_outline",
+        "name": "Main light, Living Room",
+        "state": "checked"
+    },
+    {
+        "icon": "devices",
+        "name": "TV, Living Room",
+        "state": "checked"
+    },
+    {
+        "icon": "format_align_justify",
+        "name": "South Shutter, Living Room",
+        "state": "checked"
+    }
+]
+```
+**Note**: If you want an MDL switch to be turned on, the state has to be "checked", like the HTML attribute.
+
+The template may look like this:
+```html
+<div class="template">
+	<li class="mdl-list__item">
+		<span class="mdl-list__item-primary-content">
+            <i class="material-icons  mdl-list__item-avatar md-24">{icon}</i>
+            {name}
+        </span>
+		<span class="mdl-list__item-secondary-action">
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="{templateId}">
+                        <input type="checkbox" id="{templateId}" class="mdl-switch__input" {state} />
+                </label>
+        </span>
+	</li>
+</div>
+```
+**Note:** Each input needs an unique id. Simply use ```{templateId}``` for this, templating will handle the rest.
+
 
