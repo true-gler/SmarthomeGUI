@@ -5,3 +5,12 @@
 .mdl-list__item-avatar, .mdl-list__item-avatar.material-icons {
     border-radius: 10%;
 }
+
+.mdl-card__title + ul.mdl-list {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.b-p-0 {
+    padding-bottom: 0;
+}
