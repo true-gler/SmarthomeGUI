@@ -5,13 +5,13 @@
         "state": "checked"
     },
     {
-        "icon": "devices",
-        "name": "TV, Living Room",
+        "icon": "format_align_justify",
+        "name": "South Shutter, Living Room",
         "state": "checked"
     },
     {
-        "icon": "format_align_justify",
-        "name": "South Shutter, Living Room",
+        "icon": "devices",
+        "name": "TV, Living Room",
         "state": "checked"
     }
 ]

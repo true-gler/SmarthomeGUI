@@ -14,3 +14,24 @@
 .b-p-0 {
     padding-bottom: 0;
 }
+
+.small-text {
+    font-size: 0.7em;
+}
+
+/*Devices*/
+.mdl-textfield {
+    width: 100%;
+}
+
+.controls .mdl-textfield {
+    margin: -20px auto;
+}
+
+.controls .col-btn {
+    text-align: right;
+} 
+
+.controls .col-btn button+button {
+    margin-left: 10px;
+}

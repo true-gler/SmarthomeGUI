@@ -15,7 +15,6 @@ function guidGenerator(noTrailingUnderscore) {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
     };
     var guid = (noTrailingUnderscore ? "" : "_") + (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
-    console.log("Created GUID: " + guid);
     return guid;
 }
 
@@ -46,4 +45,23 @@ function readDataFile(dataFilePath) {
     return new Promise(function (resolve, reject) {
         $.getJSON(dataFilePath).done(resolve).fail(reject);
     });
+}
+
+//Filtering
+function filterList(text, listSelector, emptyListSelector) {
+    if (emptyListSelector == null)
+        emptyListSelector = ".empty-list";
+
+    text = text.toLowerCase();
+
+    var listItems = $(listSelector).find(".mdl-list__item:not(" + emptyListSelector + ")");
+    for (let i = 0; i < listItems.length; i++) {
+        let item = listItems.eq(i);
+        let includes = item.text().toLowerCase().includes(text);
+        if (includes) {
+            item.show();
+        } else {
+            item.hide();
+        }
+    }
 }
