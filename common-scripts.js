@@ -48,17 +48,21 @@ function readDataFile(dataFilePath) {
     });
 }
 
+function getListItems(listSelector, emptyListSelector) {
+    if (emptyListSelector == null)
+        emptyListSelector = ".empty-list";
+
+    return $(listSelector).find(".mdl-list__item:not(" + emptyListSelector + ")");
+}
+
 //Filtering
 function filterList(text, listSelector, itemTextFunction, emptyListSelector) {
     if (itemTextFunction == null)
         itemTextFunction = (x => x.text());
-        
-    if (emptyListSelector == null)
-        emptyListSelector = ".empty-list";
 
     text = text.toLowerCase();
 
-    var listItems = $(listSelector).find(".mdl-list__item:not(" + emptyListSelector + ")");
+    var listItems = getListItems(listSelector, emptyListSelector);
     for (let i = 0; i < listItems.length; i++) {
         let item = listItems.eq(i);
         let itemText = itemTextFunction(item);
@@ -68,5 +72,26 @@ function filterList(text, listSelector, itemTextFunction, emptyListSelector) {
         } else {
             item.hide();
         }
+    }
+}
+
+//Sorting
+function sortByName(listSelector, textSelector) {
+    if (textSelector == null)
+        textSelector = ".name";
+
+    sortList(listSelector, (x, y) => {
+        return $(x).find(textSelector).text().toLowerCase().localeCompare($(y).find(textSelector).text().toLowerCase());
+    })
+}
+
+function sortList(listSelector, comparerFunction) {
+    var elements = getListItems(listSelector);
+    elements.sort(comparerFunction);
+
+    //Sorting is done via flexbox "order" attribute
+    for (let i = 0; i < elements.length; i++) {
+        let element = elements.eq(i);
+        element.css("order", i);
     }
 }
