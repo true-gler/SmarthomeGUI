@@ -1,7 +1,8 @@
 /* Nano Templates - https://github.com/trix/nano */
 function nano(template, data) {
     return template.replace(/\{([\w\.]*)\}/g, function (str, key) {
-        var keys = key.split("."), v = data[keys.shift()];
+        var keys = key.split("."),
+            v = data[keys.shift()];
         for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
         return (typeof v !== "undefined" && v !== null) ? v : "";
     });
@@ -48,7 +49,10 @@ function readDataFile(dataFilePath) {
 }
 
 //Filtering
-function filterList(text, listSelector, emptyListSelector) {
+function filterList(text, listSelector, itemTextFunction, emptyListSelector) {
+    if (itemTextFunction == null)
+        itemTextFunction = (x => x.text());
+        
     if (emptyListSelector == null)
         emptyListSelector = ".empty-list";
 
@@ -57,7 +61,8 @@ function filterList(text, listSelector, emptyListSelector) {
     var listItems = $(listSelector).find(".mdl-list__item:not(" + emptyListSelector + ")");
     for (let i = 0; i < listItems.length; i++) {
         let item = listItems.eq(i);
-        let includes = item.text().toLowerCase().includes(text);
+        let itemText = itemTextFunction(item);
+        let includes = itemText.toLowerCase().includes(text);
         if (includes) {
             item.show();
         } else {
